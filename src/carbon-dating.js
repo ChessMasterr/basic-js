@@ -17,9 +17,17 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(/* sampleActivity */) {
-  throw new NotImplementedError('Not implemented');
+function dateSample(sampleActivity) {
+  // throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
+  let result = Number(sampleActivity)
+  let k = 0.693 // константа полураспада log от 2
+  if(typeof sampleActivity != 'string' ||  isNaN(sampleActivity) || !sampleActivity || result <= 0 || result > MODERN_ACTIVITY){
+      return false
+  }
+  
+  return Math.ceil(Math.log(MODERN_ACTIVITY / result) / (k / HALF_LIFE_PERIOD))
+
 }
 
 module.exports = {
