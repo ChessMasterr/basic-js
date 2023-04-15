@@ -16,7 +16,62 @@ const { NotImplementedError } = require("../extensions/index.js");
 function transform(arr) {
   // throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
-  for (let i = 0; i < arr.length; i++) {}
+
+   // for (let i = 0; i < arr1.length; i++) {
+  //   if (arr1[i] == "--discard-next") {
+  //     i++;
+  //   }
+  //   if (arr1[i] == "--discard-prev") {
+  //     if (i != 0) {
+  //       resultArr.pop();
+  //     } 
+      
+  //   }
+  //   if (arr1[i] == "--double-next") {
+  //     if (arr1[i + 1] != undefined) {
+  //     resultArr.push(arr1[i + 1]);
+  //     }
+  //   }
+  //   if (arr1[i] == "--double-prev") {
+  //     if ((i !== 0)) {
+  //       resultArr.push(arr1[i - 1]);
+  //     } else {
+  //       i++;
+  //     }
+  //   }
+    
+  //    else {
+  //     resultArr.push(arr1[i]);
+  //   }
+  // }
+  if (!Array.isArray(arr)) {
+    throw new Error("'arr' parameter must be an instance of the Array!");
+  }
+  let arr1 = [...arr];
+  let resultArr = [];
+ 
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] === '--discard-next') {
+      arr1[i + 1] = undefined
+      i++
+    } else if (arr1[i] === '--discard-prev') {
+      if (resultArr[resultArr.length - 1] === arr1[i - 1]) {
+        resultArr.pop()
+      }
+    } else if (arr1[i] === '--double-next') {
+      if (arr1[i + 1] != undefined) {
+        resultArr.push(arr1[i + 1])
+      }
+    } else if (arr1[i] === '--double-prev') {
+      if (arr1[i - 1] != undefined) {
+        resultArr.push(arr1[i - 1])
+      }
+    } else {
+      resultArr.push(arr1[i])
+    }
+  }
+  return resultArr;
 }
 
 module.exports = {
